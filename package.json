@@ -9,7 +9,8 @@
     "vector": "node src/vector.js",
     "chroma": "node src/chroma-test.js",
     "rag": "node src/rag-demo.js",
-    "rag-agent": "node src/rag-agent.js"
+    "rag-agent": "node src/rag-agent.js",
+    "shaoshupai": "node src/shaoshupai-doc.js"
   },
   "dependencies": {
     "@langchain/community": "^1.1.25",

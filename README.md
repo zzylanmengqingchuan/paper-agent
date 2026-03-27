@@ -12,6 +12,7 @@
 | Chroma 向量数据库 | 向量存储 + 语义搜索 | `npm run chroma` |
 | RAG 完整示例 | PDF加载 → 拆分 → 存储 → 检索 | `npm run rag` |
 | RAG Agent | LangGraph 工作流：检索 → 生成 | `npm run rag-agent` |
+| 少数派文档向量存储 | Markdown 向量化 + Chroma 存储 + 语义检索 | `node src/shaoshupai-doc.js` |
 
 ## 安装
 
@@ -171,6 +172,40 @@ npm run rag-agent
 
 💬 最终答案:
 根据上下文信息，NIKE在2023财年的总收入为512亿美元。
+```
+
+### 少数派文档向量存储
+
+```bash
+# 1. 先启动 Chroma 服务
+chroma run
+
+# 2. 运行向量存储
+node src/shaoshupai-doc.js
+```
+
+将少数派文章向量化并存储到 Chroma：
+
+1. **加载文档** - 读取 `files/shaoshupai.md`
+2. **拆分 Chunk** - 每块 1000 字，重叠 200 字
+3. **向量化** - 使用阿里通义 Embedding
+4. **存储** - 存入 Chroma (collection: `shaoshupai-doc`)
+5. **测试检索** - 验证语义搜索效果
+
+输出示例：
+```
+📄 加载文档...
+   长度: 8471 字符
+
+✂️  拆分为 chunks...
+   Chunk 数量: 11
+
+💾 存储到 Chroma...
+   存储成功! 当前文档数: 11
+
+🧪 运行测试...
+   查询: "知识管理有什么重要性？"
+   结果: 相似度 53.5% - "Personal Context（个人上下文）..."
 ```
 
 ## RAG 概念

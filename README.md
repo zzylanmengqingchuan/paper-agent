@@ -11,6 +11,7 @@
 | Vector/Embedding | 文本转向量 + 语义相似度 | `npm run vector` |
 | Chroma 向量数据库 | 向量存储 + 语义搜索 | `npm run chroma` |
 | RAG 完整示例 | PDF加载 → 拆分 → 存储 → 检索 | `npm run rag` |
+| RAG Agent | LangGraph 工作流：检索 → 生成 | `npm run rag-agent` |
 
 ## 安装
 
@@ -133,6 +134,43 @@ npm run rag
 🔍 步骤 5：执行语义检索...
    查询: "What technology innovations does Nike have?"
    [1] 相似度: 0.0017 - "NIKE, INC. 2023 ANNUAL REPORT..."
+```
+
+### RAG Agent（检索增强生成）
+
+```bash
+# 1. 先启动 Chroma 服务
+chroma run
+
+# 2. 先运行 rag 示例存入数据
+npm run rag
+
+# 3. 运行 RAG Agent
+npm run rag-agent
+```
+
+使用 LangGraph 构建 RAG Agent 工作流：
+
+1. **检索节点(retrieve)** - 从 Chroma 检索相关文档
+2. **生成节点(generate)** - 将上下文 + 问题交给 LLM 生成答案
+
+工作流程：
+```
+用户提问 → 检索文档 → 生成答案 → 输出结果
+```
+
+输出示例：
+```
+❓ 用户问题: What was Nike revenue in 2023?
+
+📖 正在检索文档...
+   检索到 4 个相关文档
+   [1] 相似度: 0.1258
+
+🤖 正在生成答案...
+
+💬 最终答案:
+根据上下文信息，NIKE在2023财年的总收入为512亿美元。
 ```
 
 ## RAG 概念

@@ -10,6 +10,7 @@
 | Chain Demo | LangChain 链式调用 | `npm run chain` |
 | Vector/Embedding | 文本转向量 + 语义相似度 | `npm run vector` |
 | Chroma 向量数据库 | 向量存储 + 语义搜索 | `npm run chroma` |
+| RAG 完整示例 | PDF加载 → 拆分 → 存储 → 检索 | `npm run rag` |
 
 ## 安装
 
@@ -96,6 +97,44 @@ npm run chroma
   [3] "苹果是最常见的水果..." 距离: 1.2005
 ```
 
+### RAG 完整示例
+
+```bash
+# 1. 先启动 Chroma 服务
+chroma run
+
+# 2. 运行 RAG 示例
+npm run rag
+```
+
+演示完整的 RAG 流程：
+
+1. **加载文档** - 读取 PDF/TXT 文件
+2. **拆分 Chunk** - 每块 1000 字符，重叠 200 字符
+3. **向量化** - 将每个 chunk 转换为 1536 维向量
+4. **存储** - 存入 Chroma 向量数据库
+5. **检索** - 根据语义查询最相关的内容
+
+输出示例：
+```
+📄 步骤 1：加载文档...
+   文档长度: 3151 字符
+
+✂️  步骤 2：拆分为 chunks...
+   拆分数量: 4 个 chunks
+   Chunk 大小: 1000 字符
+   重叠大小: 200 字符
+
+🔢 步骤 3：转换为向量...
+   向量维度: 1536
+
+💾 步骤 4：存储到 Chroma 数据库...
+
+🔍 步骤 5：执行语义检索...
+   查询: "What technology innovations does Nike have?"
+   [1] 相似度: 0.0017 - "NIKE, INC. 2023 ANNUAL REPORT..."
+```
+
 ## RAG 概念
 
 RAG (Retrieval-Augmented Generation) 检索增强生成，是 AI 搜索资料辅助生成答案的有效方式。
@@ -111,4 +150,6 @@ RAG (Retrieval-Augmented Generation) 检索增强生成，是 AI 搜索资料辅
 - `@langchain/deepseek` - DeepSeek 模型集成
 - `@langchain/community` - 社区集成（含阿里通义 Embedding）
 - `@langchain/langgraph` - LangGraph 状态图
+- `@langchain/textsplitters` - 文本拆分器
 - `chromadb` - Chroma 向量数据库客户端
+- `pdf-parse` - PDF 文件解析

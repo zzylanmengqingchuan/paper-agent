@@ -1,2 +1,5 @@
 node_modules
 .env
+
+# Chroma 数据库数据
+chroma/
